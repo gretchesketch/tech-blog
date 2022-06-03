@@ -1,0 +1,27 @@
+{{#if post}}
+<div class="container-fluid me-4 p-4 d-flex justify-content-center">
+    <form class="col-8">
+
+        <!-- title input -->
+        <div class="form-outline mb-4">
+           <textarea name="post_title" class="form-control" id="form6Example7" rows="4">{{post.post_title}}</textarea>
+            <label class="form-label" for="form6Example3">post_title</label>
+        </div>
+
+        <!-- content input -->
+        <div class="form-outline mb-4">
+            <textarea name="post_content" class="form-control" id="form6Example7" rows="4">{{post.post_contents}}</textarea>
+            <label class="form-label" for="form6Example7">post_contents</label>
+        </div>
+
+        <!-- Submit button -->
+        <button id="submit-edit-post" name="{{post.id}}" type="submit" class="btn btn-dark btn-block mb-4">Submit Editted Post</button>
+
+    </form>
+
+</div>
+{{/if}}
+
+{{#if loggedIn}}
+<script src="/script/edit-post.js"></script>
+{{/if}}

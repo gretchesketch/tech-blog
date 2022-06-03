@@ -1,0 +1,62 @@
+{{#if post}}
+<div class="container mt-5 mb-3 d-flex">
+
+    <div class="row col-12 border border-dark">
+        <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
+            <h6 class="fw-lighter p-2 text-white">{{post.post_title}}</h6>
+            <h6 class="fst-italic fw-lighter p-2">Posted by {{post.user.username}} on {{formatDate post.createdAt}}</h6>
+        </div>
+        <div class="col-12 p-2 justify-content-center">{{post.post_contents}}</div>
+    </div>
+</div>
+
+{{#if loggedIn}}
+<div class="container mt-5 d-flex">
+
+    <form class="col-12">
+
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+            <textarea name="post_comment" class="form-control" id="form6Example7" rows="2"></textarea>
+            <label class="form-label" for="form6Example7">Leave a comment</label>
+        </div>
+
+        <!-- Submit button -->
+        <button name="{{post.id}}" id="create-comment" type="submit" class="btn btn-dark btn-block mb-4">Create Comment</button>
+
+    </form>
+</div>
+{{/if}}
+
+    {{#if post.comments}}
+      <div class="container mb-4 d-flex flex-column border border-dark">
+            <div class="row p-2 border-bottom border-dark">
+                <div class="col-12 p-2">
+                    <h6 class="fw-bold text-center">Comments</h6>
+                </div>
+            </div>
+            <div class="row p-2">
+                <ul class="col-9 p-2" style="list-style-type:none">
+                    {{#each post.comments}}
+                    {{> comment}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    {{/if}}
+
+    {{#unless post.comments}}
+     <div class="container mb-4 d-flex flex-column border border-dark">
+            <div class="row p-2">
+                <div class="col-12 p-2">
+                    <h6 class="fw-bold text-center">There are no comments for this blog post yet!</h6>
+                </div>
+            </div>
+     {{/unless}}
+
+{{/if}}
+
+
+{{#if loggedIn}}
+<script src="/script/comment.js"></script>
+{{/if}}
