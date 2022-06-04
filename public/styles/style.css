@@ -1,0 +1,16 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Mobile first design */
+  #login-form {
+    max-width: 400px;
+  }
