@@ -21,6 +21,7 @@ app.use(session({
     db: sequelize,
     checkExpirationInterval: 1000*60*15, //Will check every 15 mintues
     expiration: 1000*60*30 //Expire after half an hour
+    //cookie.sameSite. sameSite:cookie: { httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 * 48, sameSite: 'none' }
   })
 }));
 
