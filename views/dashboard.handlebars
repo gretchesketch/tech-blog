@@ -1,72 +1,23 @@
-<div class="container-fluid p-2 m-2 d-flex flex-column">
-
-    <div class="container d-flex">
-        <button id="addpost" type="button" class="btn btn-dark btn-lg">Add New Post</button>
-    </div>
-
-    {{#if posts}}
-    {{#each posts as |post|}}
-    <div class="container mt-5 d-flex">
-        <div class="row col-12 border border-dark">
-            <div class="col-12 p-2 text-white bg-dark d-flex justify-content-between align-items-baseline">
-                <a class="fw-lighter p-2 text-white">{{post_title}}</a>
-                <button id="edit-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i
-                        class="far fa-edit fa-2x"></i></button>
-                <button id="delete-post" name="{{id}}" type="button" class="btn btn-dark btn-floating"><i
-                        class="far fa-trash-alt fa-2x"></i></button>
-            </div>
-            <div class="col-12 p-2 justify-content-center">
-                <p>{{post_contents}}</p>
-            </div>
+{{#if Posts}}
+  {{#each Posts as |post|}}
+    <div class='row'>
+      <div class='card'>
+        <div class='card-header'>{{post.title}}</div>
+        <div class='card-body'>
+          <p class='card-text'>
+            {{blog.content}}
+          </p>
+          <a href='/blogpage.html' class='btn btn-primary'>Go somewhere</a>
         </div>
-    </div>
-
-    <div class="container mt-4 d-flex">
-
-        {{#if post.comments}}
-        <div class="container mb-4 d-flex flex-column border border-dark">
-            <div class="row p-2 border-bottom border-dark">
-                <div class="col-12 p-2">
-                    <h6 class="fw-bold text-center">Comments</h6>
-                </div>
-            </div>
-            <div class="row p-2">
-                <ul class="col-12 p-2" style="list-style-type:none">
-                    {{#each comments}}
-                    {{> comment}}
-                    {{/each}}
-                </ul>
-            </div>
+        <div class='card-footer text-muted'>
+          <a href='/edit-blog'>Edit Blog</a>
+          <button id='delete-post-button'>Delete Post</button>
         </div>
-        {{/if}}
-
-        {{#unless post.comments}}
-        <div class="container mb-4 d-flex flex-column border border-dark">
-            <div class="row p-2">
-                <div class="col-12 p-2">
-                    <h6 class="fw-bold text-center">There are no comments for this blog post yet!</h6>
-                </div>
-            </div>
-        </div>
-        {{/unless}}
-
-
+      </div>
     </div>
+  {{/each}}
+{{/if}}
 
-    {{/each}}
-    {{/if}}
-
-
-
-    {{#unless posts}}
-    <div class="container mt-4 d-flex flex-column border border-dark">
-        <div class="row p-2">
-            <div class="col-12 p-2">
-                <h6 class="fw-bold text-center">You don't have any posts yet! Click on Add Post to add a new post</h6>
-            </div>
-        </div>
-    </div>
-    {{/unless}}
-
-    <script src="/script/add-post.js"></script>
-    <script src="/script/edit-post.js"></script>
+<div class='row'>
+  <a id='add-post-link' href='/create-blog'>Add Post</a>
+</div>
