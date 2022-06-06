@@ -1,47 +1,21 @@
-const path = require('path');
-const express = require('express');
-const sequelize = require('./config/connection');
-const routes = require('./controllers');
-const exphbs = require('express-handlebars');
-const helpers = require('./utils/helpers');
-const hbs = exphbs.create({ extname: 'hbs', defaultLayout: 'main', helpers });
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const Sequelize = require('sequelize');
+require('dotenv').config();
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+let sequelize;
 
-// Session middleware
-app.use(session({
-  secret: process.env.SESSION_KEY,
-  cookie: {},
-  resave: false,
-  saveUninitialized: true,
-  store: new SequelizeStore({
-    db: sequelize,
-    checkExpirationInterval: 1000*60*15, //Will check every 15 mintues
-    expiration: 1000*60*30 //Expire after half an hour
-    //cookie.sameSite. sameSite:cookie: { httpOnly: true, secure: true, maxAge: 1000 * 60 * 60 * 48, sameSite: 'none' }
-  })
-}));
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+      host: 'localhost',
+      dialect: 'mysql',
+      port: 3306
+    }
+  );
+}
 
-
-// Parsing middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(routes);
-
-
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
-
-// middleware for static folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-
-// sync sequelize models to the database, then turn on the server
-sequelize.sync({ force: false}).then(() => {
-  app.listen(PORT, () => console.log(`Now listening to ${PORT} now`));
-});
+module.exports = sequelize;
