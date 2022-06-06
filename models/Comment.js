@@ -1,49 +1,24 @@
-const { Model, DataTypes, Deferrable } = require('sequelize');
-const uuid = require('uuid');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-
-class Comment extends Model { }
+class Comment extends Model {}
 
 Comment.init(
-    {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: false,
-            unique: true,
-            primaryKey: true,
-        },
-        comment: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        user_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-                deferrable: Deferrable.INITIALLY_IMMEDIATE
-            }
-        },
-        post_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-              model: 'post',
-              key: 'id',
-              deferrable: Deferrable.INITIALLY_IMMEDIATE
-            }
-          }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    {
-        sequelize,
-        timestamps: true,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'comment'
-    }
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+  }
 );
 
 module.exports = Comment;
