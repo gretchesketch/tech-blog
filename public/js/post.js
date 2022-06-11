@@ -1,13 +1,13 @@
 const newPostHandler = async (evt)=> {
   evt.preventDefault();
   const title = document.querySelector('#create-post-title').value 
-  const body = document.querySelector('#create-post-content').value;
+  const content = document.querySelector('#create-post-content').value;
   
   await fetch('/api/posts',{
       method: 'POST',
       body: JSON.stringify({
           title,
-          body,
+          content,
       }),
       headers: { 'Content-Type' : 'application/JSON'},
   });

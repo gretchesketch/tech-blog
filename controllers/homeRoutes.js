@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     });
 
     // Serialize data so the template can read it
-    const blogs = postData.map((post) => post.get({ plain: true }));
+    const posts = postData.map((post) => post.get({ plain: true }));
     // if(req.session.logged_in) {
     //   const userData = await User.findByPk(req.session.user_id, {
     //     attributes: { exclude: ['password'] },
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
     //   console.log('user', name)
     // };
     res.render('homepage', { 
-      blogs
+      posts, logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);

@@ -44,10 +44,11 @@ router.put("/edit/:id", withAuth, async (req, res) => {
 });
 
 router.delete("/:id", withAuth, async (req, res) => {
+  console.log('delete id', req.params.id)
   try {
     const [affectedRows] = await Post.destroy({
       where: {
-        id: req.params.id,
+        id: req.params.id
       },
     });
 

@@ -21,17 +21,16 @@ const editPostHandler = async (evt)=> {
 
 const newDeletePostHandler = async (evt)=> {
     evt.preventDefault();
-    await fetch(`/api/posts/${postId}`,{
+    await fetch(`/api/posts/${evt.target.getAttribute("data-postId")}`,{
         method: 'DELETE',
-        body: JSON.stringify({
-            postId
-        }),
-        headers: { 'Content-Type' : 'application/JSON'},
     });
 
     window.location.replace('/dashboard');
 
 }
 
-document.querySelector('#edit-post-save').addEventListener('click', editPostHandler);
-document.querySelector('#delete-post').addEventListener('click', newDeletePostHandler);
+
+document.querySelectorAll('#delete-post-button').forEach((btn) => {
+    
+    btn.addEventListener('click', newDeletePostHandler)
+})

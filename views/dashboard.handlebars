@@ -1,17 +1,17 @@
-{{#if Posts}}
-  {{#each Posts as |post|}}
+{{#if posts}}
+  {{#each posts as |post|}}
     <div class='row'>
       <div class='card'>
         <div class='card-header'>{{post.title}}</div>
         <div class='card-body'>
           <p class='card-text'>
-            {{blog.content}}
+            {{post.content}}
           </p>
           <a href='/blogpage.html' class='btn btn-primary'>Go somewhere</a>
         </div>
         <div class='card-footer text-muted'>
-          <a href='/edit-blog'>Edit Blog</a>
-          <button id='delete-post-button'>Delete Post</button>
+          <a href='/edit-blog/{{post.id}}'>Edit Blog</a>
+          <button id='delete-post-button' data-postId={{post.id}} >Delete Post</button>
         </div>
       </div>
     </div>
@@ -19,5 +19,6 @@
 {{/if}}
 
 <div class='row'>
-  <a id='add-post-link' href='/create-blog'>Add Post</a>
+  <a id='add-post-link' href='/dashboard/new-post'>Add Post</a>
 </div>
+<script src="/js/edit-post.js"></script>
