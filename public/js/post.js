@@ -3,7 +3,7 @@ const newPostHandler = async (evt)=> {
   const title = document.querySelector('#create-post-title').value 
   const body = document.querySelector('#create-post-content').value;
   
-  await fetch('/api/posts/edit/',{
+  await fetch('/api/posts',{
       method: 'POST',
       body: JSON.stringify({
           title,
@@ -21,4 +21,4 @@ const cancelHandler = async (evt)=> {
   window.location.replace('/dashboard');
 }
 document.querySelector('#create-post-form').addEventListener('submit', newPostHandler);
-document.querySelector('#cancel').addEventListener('click', cancelHandler);
+//document.querySelector('#cancel').addEventListener('click', cancelHandler);
